@@ -8,12 +8,46 @@ import org.springframework.web.bind.annotation.*;
 
 public class ProductApi {
 
+    //PARAMETR
 
+
+//    @GetMapping
+//    public String getProducts ( @RequestParam String name ,
+//                                @RequestParam(required = false, defaultValue = " ") String surname) {
+//
+//        return "Hello " + name + " " + surname;
+//    }
+
+
+    //PATH
+
+
+//    @GetMapping("/{name}")
+//
+//    public String getProducts(@PathVariable String name){
+//
+//        return "Hello " + name;
+//    }
+
+
+    //HEADER
+
+//    @GetMapping
+//
+//    public String getProducts(@RequestHeader String name){
+//
+//        return "Hello " + name;
+//    }
+
+//BODY
     @GetMapping
-    public String getProducts ( @RequestParam String name , @RequestParam String surname) {
 
-        return "Hello " + name + " " + surname;
+    public String getProducts(@RequestBody String name){
+
+        return "Hello " + name;
     }
+
+
 
 
 
