@@ -1,13 +1,17 @@
 package pl.wiktorowski.ksb2;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class Ksb2ApplicationTests {
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-    @Test
-    void contextLoads() {
+
+@SpringBootApplication
+public class Ksb2Application {
+
+    public static void main(String[] args) { SpringBootApplication.run(Ksb2Application.class, args);
+
     }
 
 }
+
+
+
