@@ -43,11 +43,46 @@ public class VideoApi {
 
     @PostMapping
 
-    public String addVideo(@RequestBody Video video) {
-            return "";
+    public ResponseEntity addVideo(@RequestBody Video video) {
+        boolean add = videoList.add(video);
+
+        if (add) {
+            return new ResponseEntity<>(HttpStatus.CREATED);
+
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
+    @PutMapping
+
+    public ResponseEntity modVideo(@RequestBody Video newVideo) {
+
+        Optional<Video> first = videoList.stream().filter(video -> video.getId() == newVideo.getId()).findFirst();
+        if (first.isPresent()) {
+
+            videoList.remove(first.get());
+            videoList.add(newVideo);
+
+            return new ResponseEntity(HttpStatus.OK);
+
+        }
+
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity removeVideo(@PathVariable long id) {
+
+        Optional<Video> first = videoList.stream().filter(video -> video.getId() == id).findFirst();
+        if (first.isPresent()) {
+            videoList.remove(first.get());
+
+            return new ResponseEntity<>(first.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
 
 }
