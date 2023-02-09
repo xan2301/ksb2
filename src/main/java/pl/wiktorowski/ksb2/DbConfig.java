@@ -1,6 +1,7 @@
 package pl.wiktorowski.ksb2;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -15,25 +16,31 @@ import javax.sql.DataSource;
 public class DbConfig {
 
 
-    @Bean
-    public DataSource getDataSource(){
-        DataSourceBuilder dataSourceBuilder =
-                DataSourceBuilder.create();
-        dataSourceBuilder.url("jdbc:mysql://localhost:3306/jeden");
-        dataSourceBuilder.username("root1");
-        dataSourceBuilder.password("root");
-        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
-        return dataSourceBuilder.build();
+//    @Bean
+//    public DataSource getDataSource(){
+//        DataSourceBuilder dataSourceBuilder =
+//                DataSourceBuilder.create();
+//        dataSourceBuilder.url("jdbc:mysql://localhost:3306/jeden");
+//        dataSourceBuilder.username("root1");
+//        dataSourceBuilder.password("root");
+//        dataSourceBuilder.driverClassName("com.mysql.cj.jdbc.Driver");
+//        return dataSourceBuilder.build();
 
+    private DataSource dataSource;
 
+    @Autowired
+
+    public DbConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
+
     @Bean
 
     public JdbcTemplate getJdbctemplate()
 
     {
 
-        return new JdbcTemplate(getDataSource());
+        return new JdbcTemplate(dataSource);
 
 
     }
